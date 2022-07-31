@@ -1,0 +1,10 @@
+{
+    "baseUrl":"http://ec2-34-213-123-189.us-west-2.compute.amazonaws.com:4000",
+    "db":{
+        "host":"mysql_server",
+        "user":"abc",
+        "password":"secret",
+        "schema":"test_db",
+        "port":3306
+    }
+}

@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  mysql_server:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_USER=abc
+      - MYSQL_DATABASE=test_db
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - /var/lib/mysql
+
+
+  node_appjs:
+    container_name: re_server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: test8:v1
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    expose:
+      - 4000
+    environment:
+      - NODE_ENV=dev 
