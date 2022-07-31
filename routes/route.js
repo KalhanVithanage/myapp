@@ -8,7 +8,7 @@ const config = require("../config/config");
 const { dbConnection } = require("../db/db");
 
 router.route("/").get((req, res, next) => {
-  console.log("hello mt ");
+  console.log("hello  bor ");
   res.send("user hello");
 });
 
@@ -191,5 +191,18 @@ router.route("/images").get((req, res, next) => {
     }
   });
 });
+
+router.route("/posts").get((req, res, next) => {
+  const _query = `SELECT * FROM posts ; `;
+
+  dbConnection.db.query(_query, (err, data) => {
+    if (err) console.log(err);
+    else {
+      res.status(200).json(data);
+      console.log("sucsss");
+    }
+  });
+});
+
 
 module.exports = router;
