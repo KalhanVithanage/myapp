@@ -262,14 +262,6 @@ router.route("/insert").post(async (req, res, next) => {
       }
     });
   }
-  //  const _query = `INSERT INTO posts (result,pId,cId) values ("${item}","${pId}","${cId}") ; `;
-
-  //  dbConnection.db.query(_query, (err, data) => {
-  //    if (err) console.log(err);
-  //    else {
-  //      console.log("sucsss");
-  //    }
-  //  });
 });
 
 router.route("/list").get((req, res, next) => {
