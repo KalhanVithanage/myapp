@@ -13,6 +13,43 @@ router.route("/").get((req, res, next) => {
   res.send("user hello");
 });
 
+
+router.route("/login").post((req, res, next) => {
+  const { pname,password } = req.body;
+ 
+  const _query = `SELECT * FROM  parent where pname = "${pname}" AND password = "${password}" ; `;
+ 
+         dbConnection.db.query(_query, (err, data) => {
+           if (err) console.log(err);
+           else {
+             console.log(data)
+            res.status(200).json(data)
+           }
+         });
+ 
+ });
+
+
+router.route("/register").post((req, res, next) => {
+ const { pname, cname ,password, comfirmPassword } = req.body;
+ const  pId =Math.floor(Math.random() * 100);
+ const  cId =Math.floor(Math.random() * 50);
+
+ const _query = `INSERT INTO parent (pname,cname,password,comfirmPassword,pId,cId) values ("${pname}","${cname}","${password}","${comfirmPassword}","${pId}","${cId}") ; `;
+
+        dbConnection.db.query(_query, (err, data) => {
+          if (err) console.log(err);
+          else {
+            console.log("sucsss");
+            res.status(200).json("success")
+          }
+        });
+
+        
+
+});
+
+
 router.route("/upload").post(async (req, res, next) => {
   const { pId, cId } = req.body;
   const filePath = `../public/images/${Date.now()}.jpg`;
