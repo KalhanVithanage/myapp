@@ -7,12 +7,12 @@ const user = require('./routes/route');
 
 
   const app = (express());
-  app.use(bodyparser.json());
+  app.use(bodyparser.json({limit:'50mb'}));
   app.use(bodyparser.urlencoded({
       extended:true
   }));
  
-  console.log("heloo my name is oo");
+  console.log("heloo my name is my yo");
   app.use(core());
   app.use('/user/static', express.static('public'))
   app.use('/user',user);
