@@ -145,12 +145,17 @@ router.route("/posts").post(async (req, _res, next) => {
   console.log(token.id);
   await axios
     .get(
-      `https://graph.facebook.com/v14.0/me?fields=posts%7Bcomments%7D&access_token=${token.id}`
+      `https://graph.facebook.com/v14.0/me?fields=instagram_business_account%7Bmedia%7Bcomments%7D%7D&access_token=EAARCMH6oI2ABAA4jV9zr1IwiWqTOOBOm5tP4ZBTwv6xiFOqRAcaqGXZBF6tBQ3Up8g1RGPdb5wyiCVW6eZBfLCOjMzCCNJn7Mv62AHd6oeTyrTcvxoGCtlZCZAquOr6hBEGXXSfZCWxPQrrAiJVXFpq3l4pGa7yFaq8K7FH2iJJZCJhjNGNNLay`
     )
     .then((_data) => {
-      for (const value in _data.data.posts.data) {
-        let _obj = _data.data.posts.data[value].comments;
-        _obj?.data.map((res) => {
+    
+
+       
+       for(const val in _data.data.instagram_business_account.media.data[0]){
+        let _obj =  _data.data.instagram_business_account.media.data[0]
+        let postdata = _obj[val].data;
+
+        postdata?.map((res) => {
           const config = {
             headers: {
               Authorization: `Bearer /5Hgv9rTWlEqxq2+alLk1f/nYm6Nih8rY/KC2VxfV9KAWDhvlcEF0pYZjCIx5cW5voK7BGPS3xWivQaILPBNXQ==`,
@@ -167,7 +172,7 @@ router.route("/posts").post(async (req, _res, next) => {
                   "Column 3",
                   "Column 4",
                 ],
-                Values: [["value", res.message, "value", "value", "value"]],
+                Values: [["value", res.text, "value", "value", "value"]],
               },
             },
             GlobalParameters: {},
@@ -188,7 +193,7 @@ router.route("/posts").post(async (req, _res, next) => {
                 return element !== undefined;
               });
               let item = _data.flat(2).splice(2, 4).join(",");
-
+              console.log("_item",item);
               let _item = _data.flat(2).splice(1, 4);
               console.log(_item[0]);
               var today = new Date();
@@ -210,7 +215,7 @@ router.route("/posts").post(async (req, _res, next) => {
             })
             .catch(console.log);
         });
-        _res.status(200).json("added");
+        //_res.status(200).json("added");
       }
     })
     .catch((e) => console.log(e));
